@@ -16,9 +16,9 @@
   gap: 2rem;
   margin: auto;
   border: 1px solid black;
-  box-shadow: 9px 10px 38px 0px rgba(94,82,82,0.75);
-  -webkit-box-shadow: 9px 10px 38px 0px rgba(94,82,82,0.75);
-  -moz-box-shadow: 9px 10px 38px 0px rgba(94,82,82,0.75);
+  box-shadow: 9px 10px 38px rgba(94,82,82,0.75);
+  -webkit-box-shadow: 9px 10px 38px rgba(94,82,82,0.75);
+  -moz-box-shadow: 9px 10px 38px rgba(94,82,82,0.75);
 }
 
 .fieldset {
