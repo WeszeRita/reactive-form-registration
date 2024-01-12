@@ -1,1 +1,85 @@
-<h1>app works</h1>
+<h1 class="title">Registration</h1>
+
+<form class="form" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+
+  <label class="inputField">
+    <span>username<span class="required"></span>:</span>
+    <input
+      [class.error]="registrationForm.get('username').invalid && registrationForm.get('username').touched"
+      formControlName="username"
+      placeholder="your name"
+      type="text">
+  </label>
+
+  <label class="inputField">
+    <span>email<span class="required"></span>:</span>
+    <input
+      [class.error]="registrationForm.get('email').invalid && registrationForm.get('email').touched"
+      formControlName="email"
+      placeholder="your email"
+      type="text">
+  </label>
+
+  <label class="inputField">
+    <span>password<span class="required"></span>:</span>
+    <input
+      [class.error]="registrationForm.get('password').invalid && registrationForm.get('password').touched"
+      formControlName="password"
+      placeholder="password"
+      type="password"
+      autocomplete="false">
+  </label>
+
+  <span class="password-requirements">password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and one special character</span>
+
+  <label class="inputField">
+    <span>password again<span class="required"></span>:</span>
+    <input
+      [class.error]="registrationForm.get('confirmPassword').invalid && registrationForm.get('confirmPassword').touched"
+      formControlName="confirmPassword"
+      placeholder="password again"
+      type="password"
+      autocomplete="false">
+  </label>
+
+  <fieldset class="fieldset" formGroupName="address">
+    <legend>address</legend>
+
+    <label class="inputField">street:
+      <input formControlName="street" placeholder="street" type="text">
+    </label>
+
+    <label class="inputField">city:
+      <input formControlName="city" placeholder="city" type="text">
+    </label>
+
+    <label class="inputField">state:
+      <input formControlName="state" placeholder="state" type="text">
+    </label>
+
+    <label class="inputField">zip:
+      <input
+        [class.error]="registrationForm.get('address.zip').invalid && registrationForm.get('address.zip').touched"
+        formControlName="zip"
+        placeholder="zip"
+        type="number">
+    </label>
+
+    <div>
+      <label class="inputField">phone number:
+        <div class="phone">
+          <span>+36</span>
+          <input
+            [class.error]="registrationForm.get('address.phoneNumber').invalid && registrationForm.get('address.phoneNumber').touched"
+            class="phoneField"
+            formControlName="phoneNumber"
+            placeholder="phone number"
+            type="number">
+        </div>
+      </label>
+    </div>
+  </fieldset>
+
+  <button [disabled]="registrationForm.invalid" class="button" type="submit">Submit</button>
+</form>
+
