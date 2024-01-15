@@ -1,0 +1,89 @@
+<h1 class="title">Registration</h1>
+
+<form class="form" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+
+  <label class="input-field">
+    <span>username<span class="required"></span>:</span>
+
+    <input
+      [class.error]="usernameControl.invalid && usernameControl.touched"
+      formControlName="username"
+      placeholder="your name"
+      type="text">
+  </label>
+
+  <label class="input-field">
+    <span>email<span class="required"></span>:</span>
+
+    <input
+      [class.error]="emailControl.invalid && emailControl.touched"
+      formControlName="email"
+      placeholder="your email"
+      type="text">
+  </label>
+
+  <fieldset class="fieldset" formGroupName="credentials">
+    <legend>password</legend>
+
+    <label class="input-field">
+      <span>password<span class="required"></span>:</span>
+
+      <input
+        [class.error]="passwordControl.invalid && passwordControl.touched"
+        formControlName="password"
+        placeholder="password"
+        type="password">
+    </label>
+
+    <span class="password-requirements">password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and one special character</span>
+
+    <label class="input-field">
+      <span>password again<span class="required"></span>:</span>
+
+      <input
+        [class.error]="confirmPasswordControl.invalid && confirmPasswordControl.touched"
+        formControlName="confirmPassword"
+        placeholder="password again"
+        type="password">
+    </label>
+  </fieldset>
+
+  <fieldset class="fieldset" formGroupName="address">
+    <legend>address</legend>
+
+    <label class="input-field">street:
+      <input formControlName="street" placeholder="street" type="text">
+    </label>
+
+    <label class="input-field">city:
+      <input formControlName="city" placeholder="city" type="text">
+    </label>
+
+    <label class="input-field">state:
+      <input formControlName="state" placeholder="state" type="text">
+    </label>
+
+    <label class="input-field">zip:
+      <input
+        [class.error]="zipControl.invalid && zipControl.touched"
+        formControlName="zip"
+        placeholder="zip"
+        type="number">
+    </label>
+
+    <label class="input-field">phone number:
+      <div class="phone">
+        <span>+36</span>
+
+        <input
+          class="phone-field"
+          [class.error]="phoneNumberControl.invalid && phoneNumberControl.touched"
+          formControlName="phoneNumber"
+          placeholder="phone number"
+          type="number">
+      </div>
+    </label>
+  </fieldset>
+
+  <button [disabled]="registrationForm.invalid" class="button" type="submit">Submit</button>
+</form>
