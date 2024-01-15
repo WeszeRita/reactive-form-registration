@@ -4,8 +4,9 @@
 
   <label class="inputField">
     <span>username<span class="required"></span>:</span>
+
     <input
-      [class.error]="registrationForm.get('username').invalid && registrationForm.get('username').touched"
+      [class.error]="usernameControl.invalid && usernameControl.touched"
       formControlName="username"
       placeholder="your name"
       type="text">
@@ -13,34 +14,39 @@
 
   <label class="inputField">
     <span>email<span class="required"></span>:</span>
+
     <input
-      [class.error]="registrationForm.get('email').invalid && registrationForm.get('email').touched"
+      [class.error]="emailControl.invalid && emailControl.touched"
       formControlName="email"
       placeholder="your email"
       type="text">
   </label>
 
-  <label class="inputField">
-    <span>password<span class="required"></span>:</span>
-    <input
-      [class.error]="registrationForm.get('password').invalid && registrationForm.get('password').touched"
-      formControlName="password"
-      placeholder="password"
-      type="password"
-      autocomplete="false">
-  </label>
+  <fieldset class="fieldset" formGroupName="credentials">
+    <legend>password</legend>
 
-  <span class="password-requirements">password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and one special character</span>
+    <label class="inputField">
+      <span>password<span class="required"></span>:</span>
 
-  <label class="inputField">
-    <span>password again<span class="required"></span>:</span>
-    <input
-      [class.error]="registrationForm.get('confirmPassword').invalid && registrationForm.get('confirmPassword').touched"
-      formControlName="confirmPassword"
-      placeholder="password again"
-      type="password"
-      autocomplete="false">
-  </label>
+      <input
+        [class.error]="passwordControl.invalid && passwordControl.touched"
+        formControlName="password"
+        placeholder="password"
+        type="password">
+    </label>
+
+    <span class="password-requirements">password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and one special character</span>
+
+    <label class="inputField">
+      <span>password again<span class="required"></span>:</span>
+
+      <input
+        [class.error]="confirmPasswordControl.invalid && confirmPasswordControl.touched"
+        formControlName="confirmPassword"
+        placeholder="password again"
+        type="password">
+    </label>
+  </fieldset>
 
   <fieldset class="fieldset" formGroupName="address">
     <legend>address</legend>
@@ -59,7 +65,7 @@
 
     <label class="inputField">zip:
       <input
-        [class.error]="registrationForm.get('address.zip').invalid && registrationForm.get('address.zip').touched"
+        [class.error]="zipControl.invalid && zipControl.touched"
         formControlName="zip"
         placeholder="zip"
         type="number">
@@ -69,9 +75,10 @@
       <label class="inputField">phone number:
         <div class="phone">
           <span>+36</span>
+
           <input
-            [class.error]="registrationForm.get('address.phoneNumber').invalid && registrationForm.get('address.phoneNumber').touched"
             class="phoneField"
+            [class.error]="phoneNumberControl.invalid && phoneNumberControl.touched"
             formControlName="phoneNumber"
             placeholder="phone number"
             type="number">
