@@ -2,7 +2,7 @@
 
 <form class="form" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
 
-  <label class="inputField">
+  <label class="input-field">
     <span>username<span class="required"></span>:</span>
 
     <input
@@ -12,7 +12,7 @@
       type="text">
   </label>
 
-  <label class="inputField">
+  <label class="input-field">
     <span>email<span class="required"></span>:</span>
 
     <input
@@ -25,7 +25,7 @@
   <fieldset class="fieldset" formGroupName="credentials">
     <legend>password</legend>
 
-    <label class="inputField">
+    <label class="input-field">
       <span>password<span class="required"></span>:</span>
 
       <input
@@ -37,7 +37,7 @@
 
     <span class="password-requirements">password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and one special character</span>
 
-    <label class="inputField">
+    <label class="input-field">
       <span>password again<span class="required"></span>:</span>
 
       <input
@@ -51,19 +51,19 @@
   <fieldset class="fieldset" formGroupName="address">
     <legend>address</legend>
 
-    <label class="inputField">street:
+    <label class="input-field">street:
       <input formControlName="street" placeholder="street" type="text">
     </label>
 
-    <label class="inputField">city:
+    <label class="input-field">city:
       <input formControlName="city" placeholder="city" type="text">
     </label>
 
-    <label class="inputField">state:
+    <label class="input-field">state:
       <input formControlName="state" placeholder="state" type="text">
     </label>
 
-    <label class="inputField">zip:
+    <label class="input-field">zip:
       <input
         [class.error]="zipControl.invalid && zipControl.touched"
         formControlName="zip"
@@ -71,22 +71,19 @@
         type="number">
     </label>
 
-    <div>
-      <label class="inputField">phone number:
-        <div class="phone">
-          <span>+36</span>
+    <label class="input-field">phone number:
+      <div class="phone">
+        <span>+36</span>
 
-          <input
-            class="phoneField"
-            [class.error]="phoneNumberControl.invalid && phoneNumberControl.touched"
-            formControlName="phoneNumber"
-            placeholder="phone number"
-            type="number">
-        </div>
-      </label>
-    </div>
+        <input
+          class="phoneField"
+          [class.error]="phoneNumberControl.invalid && phoneNumberControl.touched"
+          formControlName="phoneNumber"
+          placeholder="phone number"
+          type="number">
+      </div>
+    </label>
   </fieldset>
 
   <button [disabled]="registrationForm.invalid" class="button" type="submit">Submit</button>
 </form>
-

@@ -23,7 +23,7 @@
   padding: 1rem;
 }
 
-.inputField {
+.input-field {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
