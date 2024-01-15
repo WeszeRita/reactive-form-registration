@@ -59,7 +59,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  passwordMatchValidator(control: AbstractControl) {
+  passwordMatchValidator(control: AbstractControl): void {
     const password = control.get('password');
     const confirmPassword = control.get('confirmPassword');
 
