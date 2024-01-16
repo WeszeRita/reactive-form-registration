@@ -31,10 +31,6 @@
   margin-bottom: 1rem;
 }
 
-.block {
-  display: block;
-}
-
 .error {
   border: 1px solid crimson;
 }
