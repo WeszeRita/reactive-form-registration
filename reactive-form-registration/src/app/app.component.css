@@ -37,6 +37,7 @@
 
 .error-message {
   color: crimson;
+  font-size: small;
   margin-top: -1rem;
   position: absolute;
   top: 4rem;
