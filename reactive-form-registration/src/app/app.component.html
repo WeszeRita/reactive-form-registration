@@ -10,6 +10,12 @@
       formControlName="username"
       placeholder="your name"
       type="text">
+
+    <span
+      *ngIf="usernameControl.invalid && usernameControl.touched"
+      class="error-message">
+      {{ checkForErrorMessages('username') }}
+    </span>
   </label>
 
   <label class="input-field">
@@ -20,7 +26,14 @@
       formControlName="email"
       placeholder="your email"
       type="text">
+
+    <span
+      *ngIf="emailControl.invalid && emailControl.touched"
+      class="error-message">
+      {{ checkForErrorMessages('email') }}
+    </span>
   </label>
+
 
   <fieldset class="fieldset" formGroupName="credentials">
     <legend>password</legend>
@@ -32,10 +45,15 @@
         [class.error]="passwordControl.invalid && passwordControl.touched"
         formControlName="password"
         placeholder="password"
-        type="password">
-    </label>
+        type="password"
+        autocomplete="true">
 
-    <span class="password-requirements">password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and one special character</span>
+      <span
+        *ngIf="passwordControl.invalid && passwordControl.touched"
+        class="error-message">
+        {{ checkForErrorMessages('credentials.password') }}
+      </span>
+    </label>
 
     <label class="input-field">
       <span>password again<span class="required"></span>:</span>
@@ -44,7 +62,14 @@
         [class.error]="confirmPasswordControl.invalid && confirmPasswordControl.touched"
         formControlName="confirmPassword"
         placeholder="password again"
-        type="password">
+        type="password"
+        autocomplete="true">
+
+      <span
+        *ngIf="confirmPasswordControl.invalid && confirmPasswordControl.touched"
+        class="error-message">
+        {{ checkForErrorMessages('credentials.confirmPassword') }}
+      </span>
     </label>
   </fieldset>
 
@@ -69,6 +94,12 @@
         formControlName="zip"
         placeholder="zip"
         type="number">
+
+      <span
+        *ngIf="zipControl.invalid && zipControl.touched"
+        class="error-message">
+        {{ checkForErrorMessages('address.zip') }}
+      </span>
     </label>
 
     <label class="input-field">phone number:
@@ -81,6 +112,12 @@
           formControlName="phoneNumber"
           placeholder="phone number"
           type="number">
+
+        <span
+          *ngIf="phoneNumberControl.invalid && phoneNumberControl.touched"
+          class="error-message">
+          {{ checkForErrorMessages('address.phoneNumber') }}
+        </span>
       </div>
     </label>
   </fieldset>

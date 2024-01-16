@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { checkForErrorsIn } from '../shared/utils';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
+  checkForErrorMessages = checkForErrorsIn;
   registrationForm: FormGroup;
   private readonly passwordRegEx = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$';
   private readonly phoneRegEx = '^[1-9][0-9]{8}$';
@@ -35,8 +38,7 @@ export class AppComponent implements OnInit {
     return this.registrationForm.get('address.phoneNumber');
   }
 
-  constructor(private formBuilder: FormBuilder) {
-  }
+  constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
     this.registrationForm = this.formBuilder.group({
