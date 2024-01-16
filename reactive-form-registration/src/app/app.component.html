@@ -14,7 +14,7 @@
     <span
       *ngIf="usernameControl.invalid && usernameControl.touched"
       class="error-message">
-      {{ checkForErrorMessages('username') }}
+      {{ getErrorMessage(usernameControl) }}
     </span>
   </label>
 
@@ -30,7 +30,7 @@
     <span
       *ngIf="emailControl.invalid && emailControl.touched"
       class="error-message">
-      {{ checkForErrorMessages('email') }}
+      {{ getErrorMessage(emailControl) }}
     </span>
   </label>
 
@@ -51,7 +51,7 @@
       <span
         *ngIf="passwordControl.invalid && passwordControl.touched"
         class="error-message">
-        {{ checkForErrorMessages('credentials.password') }}
+        {{ getErrorMessage(passwordControl) }}
       </span>
     </label>
 
@@ -68,7 +68,7 @@
       <span
         *ngIf="confirmPasswordControl.invalid && confirmPasswordControl.touched"
         class="error-message">
-        {{ checkForErrorMessages('credentials.confirmPassword') }}
+        {{ getErrorMessage(confirmPasswordControl) }}
       </span>
     </label>
   </fieldset>
@@ -98,7 +98,7 @@
       <span
         *ngIf="zipControl.invalid && zipControl.touched"
         class="error-message">
-        {{ checkForErrorMessages('address.zip') }}
+        {{ getErrorMessage(zipControl) }}
       </span>
     </label>
 
@@ -116,7 +116,7 @@
         <span
           *ngIf="phoneNumberControl.invalid && phoneNumberControl.touched"
           class="error-message">
-          {{ checkForErrorMessages('address.phoneNumber') }}
+          {{ getErrorMessage(phoneNumberControl) }}
         </span>
       </div>
     </label>

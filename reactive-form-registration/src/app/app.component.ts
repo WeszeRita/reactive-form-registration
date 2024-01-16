@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
-import { checkForErrorsIn } from '../shared/utils';
+import { getErrorMessage } from '../shared/utils';
 
 @Component({
   selector: 'app-root',
@@ -9,8 +9,8 @@ import { checkForErrorsIn } from '../shared/utils';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  checkForErrorMessages = checkForErrorsIn;
   registrationForm: FormGroup;
+  getErrorMessage = getErrorMessage;
   private readonly passwordRegEx = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$';
   private readonly phoneRegEx = '^[1-9][0-9]{8}$';
 
@@ -45,7 +45,7 @@ export class AppComponent implements OnInit {
       username: [null, Validators.required],
       email: [null, [Validators.required, Validators.email]],
       credentials: this.formBuilder.group({
-          password: [null, [Validators.required, Validators.pattern(this.passwordRegEx)]],
+          password: [null, [Validators.required, this.customPatternValidator(RegExp(this.passwordRegEx), 'invalid-password')]],
           confirmPassword: [null],
         },
         {
@@ -56,7 +56,7 @@ export class AppComponent implements OnInit {
         city: [null],
         state: [null],
         zip: [null, [Validators.min(1011), Validators.max(9985)]],
-        phoneNumber: [null, Validators.pattern(this.phoneRegEx)],
+        phoneNumber: [null, this.customPatternValidator(RegExp(this.phoneRegEx), 'invalid-phone')],
       }),
     });
   }
@@ -69,6 +69,19 @@ export class AppComponent implements OnInit {
       confirmPassword.setErrors({ passwordMismatchError: true });
     }
   };
+
+  customPatternValidator(pattern: RegExp, errorMessage: string): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (!control.value) {
+        return null;
+      }
+
+      const valid = pattern.test(control.value);
+      const message = {}
+      message[errorMessage] = true
+      return valid ? null : message;
+    };
+  }
 
   onSubmit(): void {
     console.log('Form values:', this.registrationForm.value);
