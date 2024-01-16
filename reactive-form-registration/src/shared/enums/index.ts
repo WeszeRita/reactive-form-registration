@@ -1,1 +1,1 @@
-export * from './errorMessage.enum';
+export { ErrorMessage } from './error-message.enum';

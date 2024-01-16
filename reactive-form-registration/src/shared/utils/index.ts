@@ -1,1 +1,1 @@
-export * from './checkForErrorsIn.util';
+export * from './get-error-message.util';
