@@ -14,7 +14,7 @@ export function getErrorMessage(formControl: AbstractControl): string {
     return ErrorMessage.passwordStrength;
   }
 
-  if (formControl.hasError('passwordMismatchError')) {
+  if (formControl.hasError('passwordMismatch')) {
     return ErrorMessage.passwordMatch;
   }
 

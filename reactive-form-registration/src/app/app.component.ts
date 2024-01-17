@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-
 import { getErrorMessage } from '../shared/utils';
 
 @Component({
@@ -11,8 +10,8 @@ import { getErrorMessage } from '../shared/utils';
 export class AppComponent implements OnInit {
   registrationForm: FormGroup;
   getErrorMessage = getErrorMessage;
-  private readonly passwordRegEx = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$';
-  private readonly phoneRegEx = '^[1-9][0-9]{8}$';
+  private readonly passwordRegEx = RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$');
+  private readonly phoneRegEx = RegExp(/^[1-9][0-9]{8}$/);
 
   get usernameControl(): AbstractControl<string> {
     return this.registrationForm.get('username');
@@ -45,7 +44,7 @@ export class AppComponent implements OnInit {
       username: [null, Validators.required],
       email: [null, [Validators.required, Validators.email]],
       credentials: this.formBuilder.group({
-          password: [null, [Validators.required, this.customPatternValidator(RegExp(this.passwordRegEx), 'invalid-password')]],
+          password: [null, [Validators.required, this.customPatternValidator(this.passwordRegEx, 'invalid-password')]],
           confirmPassword: [null],
         },
         {
@@ -56,7 +55,7 @@ export class AppComponent implements OnInit {
         city: [null],
         state: [null],
         zip: [null, [Validators.min(1011), Validators.max(9985)]],
-        phoneNumber: [null, this.customPatternValidator(RegExp(this.phoneRegEx), 'invalid-phone')],
+        phoneNumber: [null, this.customPatternValidator(this.phoneRegEx, 'invalid-phone')],
       }),
     });
   }
@@ -66,7 +65,7 @@ export class AppComponent implements OnInit {
     const confirmPassword = control.get('confirmPassword');
 
     if (password.value !== confirmPassword.value) {
-      confirmPassword.setErrors({ passwordMismatchError: true });
+      confirmPassword.setErrors({ passwordMismatch: true });
     }
   };
 
@@ -77,9 +76,7 @@ export class AppComponent implements OnInit {
       }
 
       const valid = pattern.test(control.value);
-      const message = {}
-      message[errorMessage] = true
-      return valid ? null : message;
+      return valid ? null : {[ errorMessage]: true } as ValidationErrors;
     };
   }
 

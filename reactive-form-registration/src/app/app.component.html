@@ -9,7 +9,7 @@
       [class.error]="usernameControl.invalid && usernameControl.touched"
       formControlName="username"
       placeholder="your name"
-      type="text">
+      type="password">
 
     <span
       *ngIf="usernameControl.invalid && usernameControl.touched"
@@ -34,7 +34,6 @@
     </span>
   </label>
 
-
   <fieldset class="fieldset" formGroupName="credentials">
     <legend>password</legend>
 
@@ -45,7 +44,7 @@
         [class.error]="passwordControl.invalid && passwordControl.touched"
         formControlName="password"
         placeholder="password"
-        type="password"
+        type="text"
         autocomplete="true">
 
       <span
