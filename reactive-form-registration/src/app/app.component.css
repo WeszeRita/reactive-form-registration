@@ -70,4 +70,13 @@ input::-webkit-inner-spin-button {
   height: 2rem;
   background-color: turquoise;
   border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+button[disabled] {
+  background-color: lightgrey;
+  color: gray;
+  border: 1px solid black;
+  cursor: not-allowed;
+  pointer-events: none;
 }
