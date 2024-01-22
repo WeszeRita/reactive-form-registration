@@ -65,7 +65,7 @@ export class AppComponent implements OnInit {
     const confirmPassword = control.get('confirmPassword');
 
     if (password.value !== confirmPassword.value) {
-      confirmPassword.setErrors({ passwordMismatch: true });
+      confirmPassword.setErrors({ 'password-mismatch': true });
     }
   };
 

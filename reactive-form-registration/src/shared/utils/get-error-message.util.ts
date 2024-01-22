@@ -14,7 +14,7 @@ export function getErrorMessage(formControl: AbstractControl): string {
     return ErrorMessage.passwordStrength;
   }
 
-  if (formControl.hasError('passwordMismatch')) {
+  if (formControl.hasError('password-mismatch')) {
     return ErrorMessage.passwordMatch;
   }
 
@@ -28,5 +28,3 @@ export function getErrorMessage(formControl: AbstractControl): string {
 
   return ''
 }
-
-
