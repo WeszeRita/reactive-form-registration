@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { getErrorMessage } from '../shared/utils';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +9,9 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 })
 export class AppComponent implements OnInit {
   registrationForm: FormGroup;
-  private readonly passwordRegEx = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$';
-  private readonly phoneRegEx = '^[1-9][0-9]{8}$';
+  getErrorMessage = getErrorMessage;
+  private readonly passwordRegEx = RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$');
+  private readonly phoneRegEx = RegExp(/^[1-9][0-9]{8}$/);
 
   get usernameControl(): AbstractControl<string> {
     return this.registrationForm.get('username');
@@ -35,15 +37,14 @@ export class AppComponent implements OnInit {
     return this.registrationForm.get('address.phoneNumber');
   }
 
-  constructor(private formBuilder: FormBuilder) {
-  }
+  constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
     this.registrationForm = this.formBuilder.group({
       username: [null, Validators.required],
       email: [null, [Validators.required, Validators.email]],
       credentials: this.formBuilder.group({
-          password: [null, [Validators.required, Validators.pattern(this.passwordRegEx)]],
+          password: [null, [Validators.required, this.customPatternValidator(this.passwordRegEx, 'invalid-password')]],
           confirmPassword: [null],
         },
         {
@@ -54,7 +55,7 @@ export class AppComponent implements OnInit {
         city: [null],
         state: [null],
         zip: [null, [Validators.min(1011), Validators.max(9985)]],
-        phoneNumber: [null, Validators.pattern(this.phoneRegEx)],
+        phoneNumber: [null, this.customPatternValidator(this.phoneRegEx, 'invalid-phone')],
       }),
     });
   }
@@ -64,9 +65,20 @@ export class AppComponent implements OnInit {
     const confirmPassword = control.get('confirmPassword');
 
     if (password.value !== confirmPassword.value) {
-      confirmPassword.setErrors({ passwordMismatchError: true });
+      confirmPassword.setErrors({ 'password-mismatch': true });
     }
   };
+
+  customPatternValidator(pattern: RegExp, errorMessage: string): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (!control.value) {
+        return null;
+      }
+
+      const valid = pattern.test(control.value);
+      return valid ? null : {[ errorMessage]: true } as ValidationErrors;
+    };
+  }
 
   onSubmit(): void {
     console.log('Form values:', this.registrationForm.value);
